@@ -1,19 +1,37 @@
 {
-  "name": "rahmin-fit-backend",
-  "version": "1.0.0",
-  "description": "Backend for Rahmin Fit",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/1ShoukR/Rahmin-Fit-Backend.git"
-  },
-  "author": "Rahmin Shoukoohi",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/1ShoukR/Rahmin-Fit-Backend/issues"
-  },
-  "homepage": "https://github.com/1ShoukR/Rahmin-Fit-Backend#readme"
+	"name": "rahmin-fit-backend",
+	"version": "1.0.0",
+	"description": "Backend for Rahmin Fit",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/1ShoukR/Rahmin-Fit-Backend.git"
+	},
+	"author": "Rahmin Shoukoohi",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/1ShoukR/Rahmin-Fit-Backend/issues"
+	},
+	"homepage": "https://github.com/1ShoukR/Rahmin-Fit-Backend#readme",
+	"dependencies": {
+		"bcrypt": "^5.0.1",
+		"connect-session-sequelize": "^7.1.4",
+		"cookie-parser": "^1.4.6",
+		"cors": "^2.8.5",
+		"deep-email-validator": "^0.1.21",
+		"dotenv": "^16.0.3",
+		"email-validator": "^2.0.4",
+		"express": "^4.18.1",
+		"express-es6-template-engine": "^2.2.3",
+		"express-session": "^1.17.3",
+		"multiparty": "^4.2.3",
+		"nodemailer": "^6.8.0",
+		"pg": "^8.7.3",
+		"sequelize": "^6.21.3",
+		"sequelize-cli": "^6.4.1",
+		"serve": "^14.0.1"
+	}
 }
