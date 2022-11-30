@@ -11,7 +11,20 @@ const PORT = process.env.PORT || 3004;
 
 
 // Middleware
-
+app.use(cookieParser());
+app.use(
+	session({
+		secret: 'secret',
+		resave: false,
+		saveUninitialized: true,
+		store: store,
+		cookie: {
+			secure: false,
+			maxAge: 2592000000,
+		},
+	})
+);
+store.sync();
 
 
 
