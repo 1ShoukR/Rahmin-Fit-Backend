@@ -4,13 +4,20 @@ const app = express();
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const models = require('./models');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const store = new SequelizeStore({
+	db: models.sequelize,
+});
 const PORT = process.env.PORT || 3004;
-
+const testRoute = require("./Routes/testRoute")
 
 // add sequelize to this backend
 
 
 // Middleware
+app.use(cors());
+app.use(express.json());
 app.use(cookieParser());
 app.use(
 	session({
@@ -29,6 +36,8 @@ store.sync();
 
 
 
+
+app.use('/test_route', testRoute);
 
 
 
