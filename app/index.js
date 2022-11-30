@@ -10,13 +10,14 @@ const store = new SequelizeStore({
 	db: models.sequelize,
 });
 const PORT = process.env.PORT || 3004;
-const testRoute = require("./Routes/testRoute")
+const testRoute = require("./Routes/testRoute/testRoute")
+const accountRoute = require("./Routes/account/accountLogin")
 
 // add sequelize to this backend
 
 
 // Middleware
-app.use(cors());
+app.use(cors({ origin: '*', methods: 'GET,POST,PUT,DELETE' }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(
@@ -36,8 +37,8 @@ store.sync();
 
 
 
-
-app.use('/test_route', testRoute);
+// links for the webpages
+app.use('/account', accountRoute);
 
 
 
