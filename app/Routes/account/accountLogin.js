@@ -76,9 +76,37 @@ router.post("/login_confirm", async (req, res) =>{
 
 
 // route to update account password/email
+
+
+// this route will not update the password for some reason. needs debugging.
 router.post("/update_confirm", async (req, res) => {
-	console.log(req.body)
-	res.status(200).send("I am hitting")
+	const { email, password } = req.body
+	try {
+		const findUser = await UserAccount.findOne({
+			where: {
+				email: email
+			}
+		})
+		console.log("this is findUser", findUser)
+		if (findUser) {
+			const salt = await bcrypt.genSalt(5);
+			const hashedPassword = await bcrypt.hash(password, salt);
+			findUser.passsword = hashedPassword
+			console.log("This is findUser.password", findUser.password)
+			findUser.update({
+				email: email,
+				password: hashedPassword,
+				updatedAt: new Date()
+			})
+		}
+		res.status(200).send(JSON.stringify({
+			message: "Your password has been updated!"
+		}))
+	} catch (error) {
+		res.status(400).send(JSON.stringify({
+			message: "there was an error updating your password"
+		}))
+	}
 })
 
 
