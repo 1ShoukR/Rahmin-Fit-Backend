@@ -44,7 +44,6 @@ router.post("/account_creation", async (req, res) =>{
 
 
 // route to login
-
 router.post("/login_confirm", async (req, res) =>{
 	const { email, password } = req.body
 	console.log("This is req.body", req.body)
@@ -64,6 +63,7 @@ router.post("/login_confirm", async (req, res) =>{
 			req.session.user = userWeFound
 			console.log("this is session", req.session)
 			res.status(200).send(JSON.stringify({
+				id: userWeFound.id,
 				email: userWeFound.email,
 				password: userWeFound.password
 			}))
@@ -74,9 +74,31 @@ router.post("/login_confirm", async (req, res) =>{
 })
 
 
+
+// route to update account password/email
+router.post("/update_confirm", async (req, res) => {
+	console.log(req.body)
+	res.status(200).send("I am hitting")
+})
+
+
+
+
+
+
 // route to delete account
 router.post("/delete_confirm", async (req, res) => {
-	console.log(req.body)
+	const deleteUser = await UserAccount.findOne({
+		where: {
+			id: req.session.user.id
+		}
+	})
+	if (deleteUser) {
+		await deleteUser.destroy()
+		res.status(200).send("User account deleted")
+	} else {
+		res.status(400).send("This user does not exist")
+	}
 })
 
 
