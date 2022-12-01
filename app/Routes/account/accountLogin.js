@@ -49,13 +49,21 @@ router.post("/login_confirm", async (req, res) =>{
 	const { email, password } = req.body
 	console.log("This is req.body", req.body)
 	try {
+		const findUser = await UserAccount.findOne({
+			where: {
+				email: email
+			}
+		})
+		console.log(findUser, "this is findUser")
+		const validatePassword = await bcrypt.compare(password, findUser.dataValues.password);
+		console.log('This is validated password', validatePassword);
 		if (!email || !password) {
 			res.status(400).send("invalid credentials")
-		}
+		} 
 		const userToLogin = await UserAccount.findOne({
 			where: {
 				email: email,
-				password: password,
+				password: validatePassword,
 			}
 		})
 		console.log("this is userToLogin", userToLogin)
