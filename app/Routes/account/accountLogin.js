@@ -48,29 +48,35 @@ router.post("/account_creation", async (req, res) =>{
 router.post("/login_confirm", async (req, res) =>{
 	const { email, password } = req.body
 	console.log("This is req.body", req.body)
+	if (!email || !password) {
+		res.status(400).send("invalid credentials")
+	} 
 	try {
 		const findUser = await UserAccount.findOne({
 			where: {
-				email: email
-			}
-		})
-		console.log(findUser, "this is findUser")
-		const validatePassword = await bcrypt.compare(password, findUser.dataValues.password);
-		console.log('This is validated password', validatePassword);
-		if (!email || !password) {
-			res.status(400).send("invalid credentials")
-		} 
-		const userToLogin = await UserAccount.findOne({
-			where: {
 				email: email,
-				password: validatePassword,
 			}
 		})
-		console.log("this is userToLogin", userToLogin)
-		const userWeFound = userToLogin.dataValues
+		const userWeFound = findUser.dataValues
+		const validatePassword = await bcrypt.compare(password, userWeFound.password);
+		if(validatePassword) {
+			console.log("user we found", userWeFound)
+			req.session.user = userWeFound
+			console.log("this is session", req.session)
+			res.status(200).send(JSON.stringify({
+				email: userWeFound.email,
+				password: userWeFound.password
+			}))
+		}
 	} catch (error) {
-		
+		res.status(400).send("User was not found")
 	}
+})
+
+
+// route to delete account
+router.post("/delete_confirm", async (req, res) => {
+	console.log(req.body)
 })
 
 
