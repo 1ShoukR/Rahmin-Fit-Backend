@@ -38,7 +38,7 @@ store.sync();
 
 
 // links for the webpages
-app.use('/account', accountRoute);
+app.use('/api/account', accountRoute)
 
 
 

@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      UserAccount.hasMany(models.TypesOfServices)
     }
   }
   UserAccount.init({
