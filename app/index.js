@@ -11,7 +11,7 @@ const store = new SequelizeStore({
 });
 const PORT = process.env.PORT || 3004;
 const testRoute = require("./Routes/testRoute/testRoute")
-const accountRoute = require("./Routes/account/accountLogin")
+const accountRoute = require("./Routes/account/account")
 
 // add sequelize to this backend
 
