@@ -16,7 +16,7 @@ router.get('/account_test', async (req, res) => {
 
 
 // route to create an account
-router.post("/account_creation", async (req, res) =>{
+router.post("/create-account", async (req, res) =>{
 	const {firstName, lastName, email, password} = req.body
 	try {
 		if (!firstName, !lastName, !password, !email){
@@ -44,7 +44,7 @@ router.post("/account_creation", async (req, res) =>{
 
 
 // route to login
-router.post("/login_confirm", async (req, res) =>{
+router.post("/login", async (req, res) =>{
 	const { email, password } = req.body
 	console.log("This is req.body", req.body)
 	if (!email || !password) {
@@ -79,7 +79,7 @@ router.post("/login_confirm", async (req, res) =>{
 
 
 // this route will not update the password for some reason. needs debugging.
-router.post("/update_confirm", async (req, res) => {
+router.post("/update", async (req, res) => {
 	const { email, password } = req.body
 	try {
 		const findUser = await UserAccount.findOne({
@@ -115,7 +115,7 @@ router.post("/update_confirm", async (req, res) => {
 
 
 // route to delete account
-router.post("/delete_confirm", async (req, res) => {
+router.post("/delete", async (req, res) => {
 	const deleteUser = await UserAccount.findOne({
 		where: {
 			id: req.session.user.id
